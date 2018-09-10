@@ -60,7 +60,7 @@ try:
         clearer()
         print('UpLog\nv0.1.0\nMade by Harry Chris\nResponses:')
         while True:
-            r = requests.get(iph)
+            r = requests.get(iph, timeout = timeout)
             time.sleep(timeout)
             if r.status_code == 200:
                 print(iph + ' is running well :) // AT: ' + str(datetime.datetime.now()))
