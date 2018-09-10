@@ -13,7 +13,7 @@ try:
             os.system('clear')
 
     iph = ''
-    timeout = ''
+    tout = ''
     checker = ''
     while iph == '':
         clearer()
@@ -24,7 +24,7 @@ try:
         clearer()
         checker = input('Would you like outputs to be storred in a local text file?\n1) Yes\n2) No\nAnswer: ')
 
-    while timeout == '' or timeout < 1:
+    while tout == '' or tout < 1:
         clearer()
         print('Your URL: ' + iph)
         if checker == '1':
@@ -32,7 +32,7 @@ try:
         else:
             print('Log outputs are disabled')
         print('Reminder: Timeout must be 1 second or more')
-        timeout = int(input('Timeout (seconds): '))
+        tout = int(input('Timeout (seconds): '))
 
 
 
@@ -42,7 +42,7 @@ try:
             choutput = ' and we will place the outputs into files:\nDowntime: down.log\nUptime: up.log\n'
         else:
             choutput = ' and won\'t log the outputs into a file'
-        print('Right, we will now start checking if ' + iph + ' is up every ' + str(timeout) + ' second/s' + choutput)
+        print('Right, we will now start checking if ' + iph + ' is up every ' + str(tout) + ' second/s' + choutput)
         time.sleep(2.5)
         print('3')
         time.sleep(1)
@@ -60,8 +60,8 @@ try:
         clearer()
         print('UpLog\nv0.1.0\nMade by Harry Chris\nResponses:')
         while True:
-            r = requests.get(iph, timeout = timeout)
-            time.sleep(timeout)
+            r = requests.get(iph, timeout=tout)
+            time.sleep(tout)
             if r.status_code == 200:
                 print(iph + ' is running well :) // AT: ' + str(datetime.datetime.now()))
                 if checker == '1':
