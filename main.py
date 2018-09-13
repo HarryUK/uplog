@@ -4,14 +4,15 @@ import time
 import datetime
 import os
 
+ex = requests.exceptions
 try:
+
     if platform == 'win32':
         def clearer():
             os.system('cls')
     else:
         def clearer():
             os.system('clear')
-
     iph = ''
     tout = ''
     checker = ''
@@ -60,7 +61,7 @@ try:
         clearer()
         print('UpLog\nv0.1.0\nMade by Harry Chris\nResponses:')
         while True:
-            r = requests.get(iph, timeout=tout)
+            r = requests.get(iph, timeout = tout)
             time.sleep(tout)
             if r.status_code == 200:
                 print(iph + ' is running well :) // AT: ' + str(datetime.datetime.now()))
@@ -78,13 +79,53 @@ try:
 
 except KeyboardInterrupt:
     clearer()
+    print('You\'ve now exited UpLog')
     print('Thanks for using UpLog!')
     print('If you enjoyed using UpLog please remember to give me good feedback')
     print('as it really does help :)')
     print('https://github.com/harryuk/uplog/')
     exit()
 
+except (ex.MissingSchema, ex.InvalidSchema):
+    clearer()
+    print('You forgot the schema or inserted an invalid schema, Use http:// or https:// in front of your URL')
+    exit()
+
+except ex.NewConnectionError:
+    clearer()
+    print('Could not connect to address')
+    print('Remember http:// or http:// in front of your URL')
+    exit()
+
+except ex.InvalidURL:
+    clearer()
+    print('Your URL was invalid')
+    print('If you used an IPv6 address remember to wrap it in [] for example:')
+    print('https://[1111:1111:1:1111:1111:1111:1111:1111]')
+    exit()
+
+except ex.TooManyRedirects:
+    clearer()
+    print('You were redirected too many times')
+    exit()
+
+except ex.InvalidHeader:
+    clearer()
+    print('')
+    exit()
+
+except (ex.Timeout, ex.ReadTimeout):
+    clearer()
+    print('A timeout occurred, this meant the site didn\'t respond in the time you set.')
+
+except:
+    clearer()
+    print('Unknown error occurred, please send me information of what you were doing when this error happened:')
+    print('hcarrigan59@gmail.com')
+    exit()
+
 else:
+    clearer()
     print('Unknown error occurred, please send me information of what you were doing when this error happened:')
     print('hcarrigan59@gmail.com')
     exit()
